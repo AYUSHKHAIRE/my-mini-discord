@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'css/chat.css' %}" />
+</head>
+<body>
+  <div class="dm-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="greetcontainer">
+          Good day,
+          <div id="cliusername">
+            {% if user.is_authenticated %} {{request.user.username}} {% endif %}
+          </div>
+        </div>
+        <h2>Chats</h2>
+      </div>
+      <div class="createnewchat" id="newchat">
+        <input
+          type="text"
+          placeholder="New chat ..."
+          id="newchatinput"
+          style="width: 70%"
+        />
+        <button id="newChatButton">New chat</button>
+      </div>
+      <ul class="chat-list">
+        <!-- Chat items will be dynamically populated here -->
+      </ul>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area"style="display: none;" >
+      <div class="chat-header" >
+        <img
+          src="https://via.placeholder.com/40"
+          alt="Profile"
+          class="profile-pic"
+        />
+        <p class="chat-name">Select a chat</p>
+      </div>
+      <div class="chat-messages" >
+        <!-- Chat messages will be dynamically populated here -->
+      </div>
+      <div class="typing-indicator-position"  style="max-width: 100px;">
+      </div>
+      <div class="replyposition" style="display: none;" class = "lineargrad" >
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Message..." id="messageInput" />
+        <button id="sendButton"  type="submit" >Send</button>
+        <input
+          type="hidden"
+          name="csrfmiddlewaretoken"
+          value="{{ csrf_token }}"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}
